@@ -10,6 +10,7 @@ const file = path.join(__dirname, 'data.json')
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist/assessment')));
+console.log(file);
 // Endpoint to get data
 app.get('/data', (req, res) => {
     fs.readFile(file, 'utf8', (err, data) => {
