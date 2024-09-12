@@ -18,7 +18,19 @@ app.get('/data', (req, res) => {
             res.status(500).send('Error reading file');
             return;
         }
-        res.json(JSON.parse(data));
+        let jsonData = JSON.parse(data);
+        if(jsonData.numbers.length==80){
+            jsonData.numbers=[];
+            jsonData.users=[];
+            fs.writeFile(file, JSON.stringify(jsonData, null, 2), (err) => {
+            if (err) {
+                res.status(500).send('Error writing file');
+                return;
+            }
+            res.status(200).send('Data saved');
+        });
+        }
+        res.json(jsonData);
     });
 });
 
